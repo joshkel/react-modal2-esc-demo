@@ -3,14 +3,24 @@ require('styles/App.css');
 
 import React from 'react';
 
-let yeomanImage = require('../images/yeoman.png');
-
 class AppComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
+
+  handleKeyDown(e) {
+    if (e.key === 'Escape') {
+      alert('You pressed Escape.');
+      e.stopPropagation();
+    }
+  }
+
   render() {
     return (
-      <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
+      <div className="index" onKeyDown={this.handleKeyDown}>
+        <p>Click on the input element, then press Escape.</p>
+        <input type="text" autoFocus/>
       </div>
     );
   }
